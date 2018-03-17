@@ -1,0 +1,28 @@
+Download the file from http://snap.stanford.edu/data/roadNet-TX.html. It is a plain text file that holds information about a road network. Lines starting with # are comments. Every other line contains two numbers that denote nodes and represents an edge that connects them.
+
+
+Use the Virtual Machine (VM) that was provided to you. The VM has pre-installed PostgreSQL, a free database management system.
+
+
+The overall goal of the exercise is to upload the contents of the road network file into PostgreSQL.
+
+Free Text
+Time measurements
+
+Note the specifications of your machine (memory size, processor type, frequency, cache size. etc.). Measure the time required to upload the file to PostgreSQL. You many use the time command (for more information type "man time" at the command prompt)
+
+Execute and measure the execution time for each of the following queries:
+
+SELECT count(*) 
+FROM road;
+
+SELECT "FromNodeId", count(*) 
+FROM road
+GROUP BY "FromNodeId"
+HAVING count(*)>8;
+
+SELECT R."FromNodeId", count(*) 
+FROM road R, road Q
+WHERE R."ToNodeId"=Q."ToNodeId"
+GROUP BY R."FromNodeId"
+HAVING count(*)>8;
